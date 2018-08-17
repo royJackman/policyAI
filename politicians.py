@@ -4,6 +4,7 @@ TODO:
 - Partisanism
 - Powers and allowances
 - Corporate influence
+- The 'Ted Cruz' effect
 '''
 
 class politician:
