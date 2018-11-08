@@ -7,7 +7,6 @@ TODO:
 - The 'Ted Cruz' effect
 """
 
-
 class politician:
     def __init__(self, agent, tile, corruption, salary, district):
         self.agent = agent
