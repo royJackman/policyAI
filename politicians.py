@@ -1,18 +1,17 @@
-'''
+"""
 TODO:
 - Local vs. national popularity
 - Partisanism
 - Powers and allowances
 - Corporate influence
 - The 'Ted Cruz' effect
-'''
+"""
+
 
 class politician:
-    def __init__(self,name,belief,corruption,greed,salary,influence,location):
-        self.name = name
-        self.belief = belief
+    def __init__(self, agent, tile, corruption, salary, district):
+        self.agent = agent
+        self.title = title
         self.corruption = corruption
-        self.greed = greed
         self.salary = salary
-        self.influence = influence
-        self.location = location
+        self.district = district
