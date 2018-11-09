@@ -26,9 +26,6 @@ class Policy:
         self.proWar = proWar
         self.entitlement = entitlement
         self.racism = {}
-        self.racism["white"], self.racism["black"], self.racism["amind"], self.racism[
-            "asian"
-        ], self.racism["hawaii"], self.racism["other"] = racism
+        self.racism["white"], self.racism["black"], self.racism["amind"], self.racism["asian"], self.racism["hawaii"], self.racism["other"] = racism
         self.war = war
         self.offensive = offensive
-
