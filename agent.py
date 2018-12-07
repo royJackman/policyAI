@@ -1,6 +1,7 @@
 import numpy as np
 from policy import Policy
 
+
 class agent:
     def __init__(
         self,
@@ -54,22 +55,46 @@ class agent:
         if policy.entitlement != ():
             brackets = len(policy.entitlement)
             dtax += policy.entitlement[int(self.income / (1.0 / brackets))]
-        racism = sum([(self.race[k] - policy.racism[k]) for k in self.race.keys()]) / 6.0
+        racism = (
+            sum([(self.race[k] - policy.racism[k]) for k in self.race.keys()]) / 6.0
+        )
         war = policy.war * -1.0
         war /= 1.0 if policy.offensive else 2.0
 
         opinion = sum([dtax, imm, lgbt, gowar, racism, war]) / 6.0
-        if verbose: print(dtax, imm, lgbt, gowar, racism, war)
+        if verbose:
+            print(dtax, imm, lgbt, gowar, racism, war)
         return (-1 * opinion) if real else (opinion <= 0.0)
 
     def optimal(self, taxes=(), entitlement=(), militaristic=False):
-        return Policy(self.name+"_optimal", taxes, self.proImm, self.prolgbt, self.proWar, entitlement, (self.race["white"], self.race["black"], self.race["amind"], self.race["asian"], self.race["hawaii"], self.race["other"]), self.proWar, militaristic)
-    
+        return Policy(
+            self.name + "_optimal",
+            taxes,
+            self.proImm,
+            self.prolgbt,
+            self.proWar,
+            entitlement,
+            (
+                self.race["white"],
+                self.race["black"],
+                self.race["amind"],
+                self.race["asian"],
+                self.race["hawaii"],
+                self.race["other"],
+            ),
+            self.proWar,
+            militaristic,
+        )
+
     def tojson(self):
-        return {"name":self.name,"income":self.income,"gullibility":self.gullibility,"politician":self.politician,"proImm":self.proImm,"prolgbt":self.prolgbt,"proWar":self.proWar,"race":self.race,"disposableIncome":self.disposableIncome}
-
-# johnDoe = agent("John Doe",0.4,0.5,False,45,True,True,False)
-# testPolicy = johnDoe.optimal(taxes=(0.03,-0.05,0.0,-0.03))
-
-# print(johnDoe.proCon(testPolicy, True, True))
-
+        return {
+            "name": self.name,
+            "income": self.income,
+            "gullibility": self.gullibility,
+            "politician": self.politician,
+            "proImm": self.proImm,
+            "prolgbt": self.prolgbt,
+            "proWar": self.proWar,
+            "race": self.race,
+            "disposableIncome": self.disposableIncome,
+        }

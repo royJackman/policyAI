@@ -8,7 +8,7 @@ TODO:
 """
 
 class politician:
-    def __init__(self, agent, tile, corruption, salary, district):
+    def __init__(self, agent, title, corruption, salary, district):
         self.agent = agent
         self.title = title
         self.corruption = corruption
