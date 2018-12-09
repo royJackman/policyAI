@@ -26,5 +26,6 @@
         "typescriptreact",
         "yml"
     ],
-    "python.pythonPath": "D:\\Anaconda\\envs\\final\\python.exe"
+    "python.pythonPath": "C:\\Program Files\\Python36\\python.exe",
+    "python.formatting.provider": "autopep8"
 }
