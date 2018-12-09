@@ -1,31 +1,40 @@
+import os
 import json
 import election
 import generator
 
-import keras.backend as K
+import tensorflow as tf
 
-from keras.models import Sequential
-from keras.layers import Dense, Activation
+# import keras.backend as K
+
+# from keras.models import Sequential
+# from keras.layers import Dense, Activation
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 x = open("information/people.json", "r")
 pop = json.load(x)
 x.close()
 
-x = generator.policyGen(count=100)
+c = 10000
+
+x = generator.policyGen(count=c)
 y = generator.publicOpinion(pop, x)
-x = generator.policyGen(count=100, data=True, translator=True, previous=x)
+x = generator.policyGen(count=c, data=True, translator=True, previous=x)
 
-model = Sequential()
-model.add(Dense(10, input_shape=13))
-model.add(Activation("relu"))
-model.add(Dense(6, input_shape=10))
-model.add(Activation("relu"))
-model.add(Dense(1, input_shape=6))
-model.add(Activation("softmax"))
+# model = Sequential()
+# model.add(Dense(8, input_shape=(13,)))
+# model.add(Activation("relu"))
+# model.add(Dense(4, input_shape=(8,)))
+# model.add(Activation("relu"))
+# model.add(Dense(1, input_shape=(4,)))
+# model.add(Activation("softmax"))
 
-model.compile(optimizer="rmsprop", loss="mse")
+# model.compile(optimizer="rmsprop", loss="mae", metrics=['mae','accuracy'])
 
-model.fit(x[:80], y[:80])
+# scale = int(0.8*c)
 
-print(model.evaluate(x[80:], y[80:]))
+# model.fit(x[:scale], y[:scale], epochs=20, batch_size=400, verbose=2)
+
+# print(model.evaluate(x[scale:], y[scale:]))
 
