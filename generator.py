@@ -221,28 +221,29 @@ def population(
 
 
 def policyGen(count=3000, seed=1234, data=False, translator=False, previous=None):
-#     np.random.seed(seed)
-        if translator:
-                if previous == None:
-                        print("No previous data")
-                else:
-                        retval = previous
+    #     np.random.seed(seed)
+    if translator:
+        if previous == None:
+            print("No previous data")
         else:
-                retval = []
-                for i in range(count):
-                        retval.append(policy.random(name="law_" + str(i)))
-        if not data:
-                return retval
-        data = np.zeros((count, 13))
+            retval = previous
+    else:
+        retval = []
         for i in range(count):
-                data[i, :] = retval[i].toDatum()
-        return data
+            retval.append(policy.random(name="law_" + str(i)))
+    if not data:
+        return retval
+    data = np.zeros((count, 13))
+    for i in range(count):
+        data[i, :] = retval[i].toDatum()
+    return data
 
-def publicOpinion(population,policies):
-        totals = np.zeros(len(policies))
-        for p in range(len(policies)):
-                total = 0.0
-                for k in population.keys():
-                        total += election.quickAgent(population[k]).proCon(policies[p])
-                totals[p] = total
-        return totals/len(population.keys())
+
+def publicOpinion(population, policies):
+    totals = np.zeros(len(policies))
+    for p in range(len(policies)):
+        total = 0.0
+        for k in population.keys():
+            total += election.quickAgent(population[k]).proCon(policies[p])
+        totals[p] = total
+    return totals/len(population.keys())
